@@ -33,8 +33,7 @@ return array(
         ),
 		'user'=>array(
 			'allowAutoLogin'=>true,
-            'loginUrl'=>'/autch/login'
-            
+            'loginUrl'=>'/autch/login'  
 		),
   		'swiftMailer' => array(
             'class' => 'ext.swiftMailer.SwiftMailer',
@@ -46,7 +45,6 @@ return array(
 			'class'=>'ext.EPhpThumb.EPhpThumb',
 			'options'=>array()
 		),
-
 	   'urlManager'=>array(
 			'urlFormat'=>'path',
             'showScriptName' => false,
@@ -57,7 +55,6 @@ return array(
 				'<controller:\w+>/<action:\w+>'=>'<controller>/<action>',
 			),
 		),
-		
 		'db'=>array(
 			'connectionString' => 'mysql:host=localhost;dbname=dcms',
 			'emulatePrepare' => true,
@@ -68,7 +65,6 @@ return array(
 		'errorHandler'=>array(
 			'errorAction'=>'site/error',
 		),
-
 		'log'=>array(
 			'class'=>'CLogRouter',
 			'routes'=>array(
