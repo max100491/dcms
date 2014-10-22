@@ -33,5 +33,7 @@ class Controller extends CController
             )
         );
 
+        Yii::app()->clientScript->registerMetaTag('text/html; charset=utf-8');
+
     }
 }

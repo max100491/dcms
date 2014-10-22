@@ -26,6 +26,8 @@ class MController extends CController
     
     public function init()
     {
+        Yii::app()->clientScript->registerMetaTag('text/html; charset=utf-8');
+        
         $path = Yii::getPathOfAlias('application.modules.admin.assets');
         $pathTinyMCE = Yii::app()->assetManager->publish(Yii::getPathOfAlias('application.modules.admin.assets.js.tinymce'), true, -1, YII_DEBUG);
         Yii::app()->bootstrap->register();

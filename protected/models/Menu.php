@@ -1,6 +1,8 @@
 <?php
+
 class Menu extends CActiveRecord
 {
+
 	public static function model($className=__CLASS__)
 	{
 		return parent::model($className);
@@ -10,11 +12,6 @@ class Menu extends CActiveRecord
 	{
 		return 'cf_menu';
 	}
-
-    public function behaviors(){
-        return array( 'EAdvancedArBehavior' => array(
-            'class' => 'application.behaviors.EAdvancedArBehavior'));
-    }
 
 	public function rules()
 	{
@@ -27,15 +24,15 @@ class Menu extends CActiveRecord
 	public function relations()
 	{
 		return array(
-            'items' => array(self::MANY_MANY, 'Items', 'cf_menu_items(menu_id, item_id)', 'condition'=>'status_id = 2'),
+			'items' => array(self::MANY_MANY, 'Items', 'cf_menu_items(menu_id, item_id)', 'condition'=>'status_id = 2'),
 		);
 	}
 
 	public function attributeLabels()
 	{
 		return array(
-			'id_menu' => '#',
-			'name_menu' => 'Наименование',
+			'id_menu' => 'Id Menu',
+			'name_menu' => 'Name Menu',
 		);
 	}
 
@@ -51,13 +48,7 @@ class Menu extends CActiveRecord
 		));
 	}
 
-    public function getList()
-    {
-        $model = self::model()->findAll();
-        return CHtml::listData($model, 'id_menu', 'name_menu');
-    }
-
-    /**
+	/**
      * Получить пункты меню по id меню. 
      */
     public function getItemMenuId($id, $order = 'sort_item ASC')
@@ -104,4 +95,5 @@ class Menu extends CActiveRecord
             return $items;
         }
     }
+	
 }
