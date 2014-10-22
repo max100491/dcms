@@ -1,0 +1,1 @@
+<?php echo $form->textAreaRow($model, 'desc_item',array('class'=>'span6 tiny-mce')); ?>

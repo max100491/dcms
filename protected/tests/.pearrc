@@ -1,0 +1,2 @@
+#PEAR_Config 0.9
+a:11:{s:7:"php_dir";s:24:"/home/user/pear/pear/php";s:8:"data_dir";s:25:"/home/user/pear/pear/data";s:7:"www_dir";s:24:"/home/user/pear/pear/www";s:7:"cfg_dir";s:24:"/home/user/pear/pear/cfg";s:7:"ext_dir";s:24:"/home/user/pear/pear/ext";s:7:"doc_dir";s:25:"/home/user/pear/pear/docs";s:8:"test_dir";s:26:"/home/user/pear/pear/tests";s:9:"cache_dir";s:26:"/home/user/pear/pear/cache";s:12:"download_dir";s:29:"/home/user/pear/pear/download";s:8:"temp_dir";s:25:"/home/user/pear/pear/temp";s:7:"bin_dir";s:20:"/home/user/pear/pear";}

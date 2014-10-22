@@ -1,0 +1,67 @@
+.input-xxlarge{
+    width: 99%;
+}
+.width100 input, .width100 textarea, .width100 ul{
+    width: 98%;
+}
+#listImages div{
+    width: 105px;
+    float: left;
+}
+#listImages img{
+    padding: 2px;
+    margin:2px;
+    cursor: all-scroll;
+    width: 96px;
+    height: 96px;
+}
+/*èíäèêàòîð îæèäàíèÿ*/
+.loader{
+    width: 290px;
+    height: 70px;
+    position: fixed;
+    top: 40%;
+    left: 40%;
+    display: none;
+    background: url('/upload/img/loading.gif') no-repeat left 10px center #fff;
+    border-radius: 7px;
+    z-index: 200;
+    padding: 10px;   
+}
+.dellimage{
+    position: absolute;
+    margin-top: -100px;
+    background: #fff;
+    margin-left: 85px;
+    height: 18px;
+    width: 15px;
+    cursor: pointer;
+}
+.dellimage i{
+    margin: 0px!important;
+    padding: 0px!important;
+}
+
+.min-form-line div{
+    float: left;
+    margin-right: 5px;
+}
+.block-sort{
+    width: 500px;
+}
+.sort ul{
+    margin: 0px;
+    padding: 0px;
+    width: 400px;
+}
+.sort li{
+    margin: 0px;
+    padding: 0px;
+    list-style: none;
+    border-bottom: 1px dotted silver;
+    padding: 3px;
+    width: 400px;
+}
+.sort i{
+    cursor: move;
+}
