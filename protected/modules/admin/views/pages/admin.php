@@ -4,6 +4,8 @@ $this->breadcrumbs=array(
 	'Manage',
 );
 
+echo '';
+
 $this->menu=array(
 	array('label'=>'<i class="icon-file icon-white" title="Создать"></i>','url'=>array('create')),
 );
