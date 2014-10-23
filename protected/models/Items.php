@@ -25,6 +25,12 @@ class Items extends CActiveRecord
 	public function relations()
 	{
 		return array(
+            'meta'=>array(self::HAS_ONE, 'Metadata', 'fk_id', 'condition'=>'model_id = 2'),
+            'pages'=>array(self::MANY_MANY, 'Pages', 'cf_page_item(item_id, page_id)', 'condition'=>'status_id = 2', 'order'=>'sort_page ASC'),
+            'type'=>array(self::BELONGS_TO, 'ItemType', 'type_item'),
+            'status'=>array(self::BELONGS_TO, 'Status', 'status_id'),          
+            'menu'=>array(self::MANY_MANY, 'Menu', 'cf_menu_items(item_id, menu_id)', 'index'=>'id_menu'),
+            'thumbroot' => array(self::HAS_ONE, 'Images', 'fk_id', 'condition'=>'model_id = 2'),
 		);
 	}
 

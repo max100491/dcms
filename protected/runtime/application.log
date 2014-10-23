@@ -13141,3 +13141,336 @@ Stack trace:
 #8 {main}
 REQUEST_URI=/index.php
 ---
+2014/10/23 12:38:48 [error] [exception.CException] exception 'CException' with message 'Путь CAssetManager.basePath "X:\home\dcms.loc\www\assets" задан неверно. Удостоверьтесь, что директория существует и доступна для записи пользователю, под которым запущен веб-сервер.' in X:\home\framework\web\CAssetManager.php:138
+Stack trace:
+#0 X:\home\framework\web\CAssetManager.php(123): CAssetManager->setBasePath('X:\home\dcms.lo...')
+#1 X:\home\framework\web\CAssetManager.php(217): CAssetManager->getBasePath()
+#2 X:\home\dcms.loc\www\protected\extensions\bootstrap\components\Bootstrap.php(306): CAssetManager->publish('X:\home\dcms.lo...', true, -1, false)
+#3 X:\home\dcms.loc\www\protected\extensions\bootstrap\components\Bootstrap.php(50): Bootstrap->getAssetsUrl()
+#4 X:\home\dcms.loc\www\protected\extensions\bootstrap\components\Bootstrap.php(81): Bootstrap->registerCoreCss()
+#5 X:\home\dcms.loc\www\protected\extensions\bootstrap\components\Bootstrap.php(115): Bootstrap->registerAllCss()
+#6 X:\home\dcms.loc\www\protected\components\Controller.php(29): Bootstrap->register()
+#7 X:\home\framework\web\CWebApplication.php(281): Controller->init()
+#8 X:\home\framework\web\CWebApplication.php(141): CWebApplication->runController('site/index')
+#9 X:\home\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#10 X:\home\dcms.loc\www\index.php(13): CApplication->run()
+#11 {main}
+REQUEST_URI=/
+---
+2014/10/23 12:38:49 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Невозможно обработать запрос "favicon.ico".' in X:\home\framework\web\CWebApplication.php:286
+Stack trace:
+#0 X:\home\framework\web\CWebApplication.php(141): CWebApplication->runController('favicon.ico')
+#1 X:\home\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#2 X:\home\dcms.loc\www\index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/favicon.ico
+---
+2014/10/23 12:39:06 [error] [exception.CDbException] exception 'CDbException' with message 'CDbConnection failed to open the DB connection: SQLSTATE[28000] [1045] Access denied for user 'dcms'@'localhost' (using password: YES)' in X:\home\framework\db\CDbConnection.php:382
+Stack trace:
+#0 X:\home\framework\db\CDbConnection.php(330): CDbConnection->open()
+#1 X:\home\framework\db\CDbConnection.php(308): CDbConnection->setActive(true)
+#2 X:\home\framework\base\CModule.php(387): CDbConnection->init()
+#3 X:\home\framework\base\CApplication.php(450): CModule->getComponent('db')
+#4 X:\home\framework\db\ar\CActiveRecord.php(634): CApplication->getDb()
+#5 X:\home\framework\db\ar\CActiveRecord.php(1428): CActiveRecord->getDbConnection()
+#6 X:\home\framework\db\ar\CActiveRecord.php(1517): CActiveRecord->getTableAlias(true)
+#7 X:\home\dcms.loc\www\protected\controllers\SiteController.php(22): CActiveRecord->findByAttributes(Array)
+#8 X:\home\framework\web\actions\CInlineAction.php(49): SiteController->actionIndex()
+#9 X:\home\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#10 X:\home\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#11 X:\home\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#12 X:\home\framework\web\CWebApplication.php(282): CController->run('index')
+#13 X:\home\framework\web\CWebApplication.php(141): CWebApplication->runController('site/index')
+#14 X:\home\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#15 X:\home\dcms.loc\www\index.php(13): CApplication->run()
+#16 {main}
+REQUEST_URI=/
+---
+2014/10/23 12:41:04 [error] [exception.CDbException] exception 'CDbException' with message 'CDbConnection failed to open the DB connection: SQLSTATE[42000] [1044] Access denied for user 'dcms'@'localhost' to database 'dcms'' in X:\home\framework\db\CDbConnection.php:382
+Stack trace:
+#0 X:\home\framework\db\CDbConnection.php(330): CDbConnection->open()
+#1 X:\home\framework\db\CDbConnection.php(308): CDbConnection->setActive(true)
+#2 X:\home\framework\base\CModule.php(387): CDbConnection->init()
+#3 X:\home\framework\base\CApplication.php(450): CModule->getComponent('db')
+#4 X:\home\framework\db\ar\CActiveRecord.php(634): CApplication->getDb()
+#5 X:\home\framework\db\ar\CActiveRecord.php(1428): CActiveRecord->getDbConnection()
+#6 X:\home\framework\db\ar\CActiveRecord.php(1517): CActiveRecord->getTableAlias(true)
+#7 X:\home\dcms.loc\www\protected\controllers\SiteController.php(22): CActiveRecord->findByAttributes(Array)
+#8 X:\home\framework\web\actions\CInlineAction.php(49): SiteController->actionIndex()
+#9 X:\home\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#10 X:\home\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#11 X:\home\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#12 X:\home\framework\web\CWebApplication.php(282): CController->run('index')
+#13 X:\home\framework\web\CWebApplication.php(141): CWebApplication->runController('site/index')
+#14 X:\home\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#15 X:\home\dcms.loc\www\index.php(13): CApplication->run()
+#16 {main}
+REQUEST_URI=/
+---
+2014/10/23 12:41:47 [error] [system.db.CDbCommand] Не удалось выполнить CDbCommand::fetchAll(): SQLSTATE[42S02]: Base table or view not found: 1146 Table 'dcms.cf_items' doesn't exist. Выполнявшийся SQL-запрос: SHOW FULL COLUMNS FROM `cf_items`.
+in X:\home\dcms.loc\www\protected\controllers\SiteController.php (22)
+in X:\home\dcms.loc\www\index.php (13)
+2014/10/23 12:41:47 [error] [exception.CDbException] exception 'CDbException' with message 'Таблица "cf_items", упомянутая в записи active record класса "Items", не найдена в базе данных.' in X:\home\framework\db\ar\CActiveRecord.php:2362
+Stack trace:
+#0 X:\home\framework\db\ar\CActiveRecord.php(411): CActiveRecordMetaData->__construct(Object(Items))
+#1 X:\home\framework\db\ar\CActiveRecord.php(658): CActiveRecord->getMetaData()
+#2 X:\home\framework\db\ar\CActiveRecord.php(1518): CActiveRecord->getTableSchema()
+#3 X:\home\dcms.loc\www\protected\controllers\SiteController.php(22): CActiveRecord->findByAttributes(Array)
+#4 X:\home\framework\web\actions\CInlineAction.php(49): SiteController->actionIndex()
+#5 X:\home\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#6 X:\home\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#7 X:\home\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#8 X:\home\framework\web\CWebApplication.php(282): CController->run('index')
+#9 X:\home\framework\web\CWebApplication.php(141): CWebApplication->runController('site/index')
+#10 X:\home\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#11 X:\home\dcms.loc\www\index.php(13): CApplication->run()
+#12 {main}
+REQUEST_URI=/
+---
+2014/10/23 12:43:50 [error] [exception.CException] exception 'CException' with message 'Не определено свойство "Items.pages".' in X:\home\framework\base\CComponent.php:130
+Stack trace:
+#0 X:\home\framework\db\ar\CActiveRecord.php(145): CComponent->__get('pages')
+#1 X:\home\dcms.loc\www\protected\controllers\SiteController.php(24): CActiveRecord->__get('pages')
+#2 X:\home\framework\web\actions\CInlineAction.php(49): SiteController->actionIndex()
+#3 X:\home\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#4 X:\home\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#5 X:\home\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#6 X:\home\framework\web\CWebApplication.php(282): CController->run('index')
+#7 X:\home\framework\web\CWebApplication.php(141): CWebApplication->runController('site/index')
+#8 X:\home\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#9 X:\home\dcms.loc\www\index.php(13): CApplication->run()
+#10 {main}
+REQUEST_URI=/
+---
+2014/10/23 12:48:05 [error] [exception.CException] exception 'CException' with message 'Не определено свойство "Items.pages".' in X:\home\framework\base\CComponent.php:130
+Stack trace:
+#0 X:\home\framework\db\ar\CActiveRecord.php(145): CComponent->__get('pages')
+#1 X:\home\dcms.loc\www\themes\dcms-main\views\site\index.php(2): CActiveRecord->__get('pages')
+#2 X:\home\framework\web\CBaseController.php(126): require('X:\home\dcms.lo...')
+#3 X:\home\framework\web\CBaseController.php(95): CBaseController->renderInternal('X:\home\dcms.lo...', Array, true)
+#4 X:\home\framework\web\CController.php(869): CBaseController->renderFile('X:\home\dcms.lo...', Array, true)
+#5 X:\home\framework\web\CController.php(782): CController->renderPartial('index', Array, true)
+#6 X:\home\dcms.loc\www\protected\controllers\SiteController.php(35): CController->render('index', Array)
+#7 X:\home\framework\web\actions\CInlineAction.php(49): SiteController->actionIndex()
+#8 X:\home\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#9 X:\home\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#10 X:\home\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#11 X:\home\framework\web\CWebApplication.php(282): CController->run('index')
+#12 X:\home\framework\web\CWebApplication.php(141): CWebApplication->runController('site/index')
+#13 X:\home\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#14 X:\home\dcms.loc\www\index.php(13): CApplication->run()
+#15 {main}
+REQUEST_URI=/
+---
+2014/10/23 12:48:09 [error] [exception.CException] exception 'CException' with message 'Не определено свойство "Items.pages".' in X:\home\framework\base\CComponent.php:130
+Stack trace:
+#0 X:\home\framework\db\ar\CActiveRecord.php(145): CComponent->__get('pages')
+#1 X:\home\dcms.loc\www\themes\dcms-main\views\site\index.php(2): CActiveRecord->__get('pages')
+#2 X:\home\framework\web\CBaseController.php(126): require('X:\home\dcms.lo...')
+#3 X:\home\framework\web\CBaseController.php(95): CBaseController->renderInternal('X:\home\dcms.lo...', Array, true)
+#4 X:\home\framework\web\CController.php(869): CBaseController->renderFile('X:\home\dcms.lo...', Array, true)
+#5 X:\home\framework\web\CController.php(782): CController->renderPartial('index', Array, true)
+#6 X:\home\dcms.loc\www\protected\controllers\SiteController.php(35): CController->render('index', Array)
+#7 X:\home\framework\web\actions\CInlineAction.php(49): SiteController->actionIndex()
+#8 X:\home\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#9 X:\home\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#10 X:\home\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#11 X:\home\framework\web\CWebApplication.php(282): CController->run('index')
+#12 X:\home\framework\web\CWebApplication.php(141): CWebApplication->runController('site/index')
+#13 X:\home\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#14 X:\home\dcms.loc\www\index.php(13): CApplication->run()
+#15 {main}
+REQUEST_URI=/
+---
+2014/10/23 12:50:11 [error] [exception.CException] exception 'CException' with message 'В классе CDbCriteria и его поведениях не найден метод или замыкание с именем "with".' in X:\home\framework\base\CComponent.php:266
+Stack trace:
+#0 X:\home\dcms.loc\www\protected\modules\admin\models\Pages.php(134): CComponent->__call('with', Array)
+#1 X:\home\dcms.loc\www\protected\modules\admin\models\Pages.php(134): CDbCriteria->with('items')
+#2 X:\home\dcms.loc\www\protected\modules\admin\views\pages\admin.php(16): Pages->search()
+#3 X:\home\framework\web\CBaseController.php(126): require('X:\home\dcms.lo...')
+#4 X:\home\framework\web\CBaseController.php(95): CBaseController->renderInternal('X:\home\dcms.lo...', Array, true)
+#5 X:\home\framework\web\CController.php(869): CBaseController->renderFile('X:\home\dcms.lo...', Array, true)
+#6 X:\home\framework\web\CController.php(782): CController->renderPartial('admin', Array, true)
+#7 X:\home\dcms.loc\www\protected\modules\admin\controllers\PagesController.php(92): CController->render('admin', Array)
+#8 X:\home\framework\web\actions\CInlineAction.php(49): PagesController->actionAdmin()
+#9 X:\home\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#10 X:\home\framework\web\filters\CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#11 X:\home\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#12 X:\home\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#13 X:\home\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#14 X:\home\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#15 X:\home\framework\web\CController.php(291): CFilterChain->run()
+#16 X:\home\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#17 X:\home\framework\web\CWebApplication.php(282): CController->run('admin')
+#18 X:\home\framework\web\CWebApplication.php(141): CWebApplication->runController('admin/pages/adm...')
+#19 X:\home\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#20 X:\home\dcms.loc\www\index.php(13): CApplication->run()
+#21 {main}
+REQUEST_URI=/admin/pages/admin
+HTTP_REFERER=http://dcms.loc/admin
+---
+2014/10/23 12:52:25 [error] [exception.CException] exception 'CException' with message 'В классе CDbCriteria и его поведениях не найден метод или замыкание с именем "with".' in X:\home\framework\base\CComponent.php:266
+Stack trace:
+#0 X:\home\dcms.loc\www\protected\modules\admin\models\Pages.php(134): CComponent->__call('with', Array)
+#1 X:\home\dcms.loc\www\protected\modules\admin\models\Pages.php(134): CDbCriteria->with('items')
+#2 X:\home\dcms.loc\www\protected\modules\admin\views\pages\admin.php(16): Pages->search()
+#3 X:\home\framework\web\CBaseController.php(126): require('X:\home\dcms.lo...')
+#4 X:\home\framework\web\CBaseController.php(95): CBaseController->renderInternal('X:\home\dcms.lo...', Array, true)
+#5 X:\home\framework\web\CController.php(869): CBaseController->renderFile('X:\home\dcms.lo...', Array, true)
+#6 X:\home\framework\web\CController.php(782): CController->renderPartial('admin', Array, true)
+#7 X:\home\dcms.loc\www\protected\modules\admin\controllers\PagesController.php(92): CController->render('admin', Array)
+#8 X:\home\framework\web\actions\CInlineAction.php(49): PagesController->actionAdmin()
+#9 X:\home\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#10 X:\home\framework\web\filters\CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#11 X:\home\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#12 X:\home\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#13 X:\home\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#14 X:\home\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#15 X:\home\framework\web\CController.php(291): CFilterChain->run()
+#16 X:\home\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#17 X:\home\framework\web\CWebApplication.php(282): CController->run('admin')
+#18 X:\home\framework\web\CWebApplication.php(141): CWebApplication->runController('admin/pages/adm...')
+#19 X:\home\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#20 X:\home\dcms.loc\www\index.php(13): CApplication->run()
+#21 {main}
+REQUEST_URI=/admin/pages/admin
+HTTP_REFERER=http://dcms.loc/admin
+---
+2014/10/23 12:53:13 [error] [exception.CHttpException.403] exception 'CHttpException' with message 'У вас недостаточно прав для выполнения указанного действия.' in X:\home\framework\web\auth\CAccessControlFilter.php:182
+Stack trace:
+#0 X:\home\framework\web\auth\CAccessControlFilter.php(145): CAccessControlFilter->accessDenied(Object(CWebUser), '?? ?????? ?????...')
+#1 X:\home\framework\web\filters\CFilter.php(38): CAccessControlFilter->preFilter(Object(CFilterChain))
+#2 X:\home\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#3 X:\home\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#4 X:\home\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#5 X:\home\framework\web\CController.php(291): CFilterChain->run()
+#6 X:\home\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#7 X:\home\framework\web\CWebApplication.php(282): CController->run('getallgallery')
+#8 X:\home\framework\web\CWebApplication.php(141): CWebApplication->runController('admin/ajax/geta...')
+#9 X:\home\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#10 X:\home\dcms.loc\www\index.php(13): CApplication->run()
+#11 {main}
+REQUEST_URI=/admin/ajax/getallgallery
+HTTP_REFERER=http://dcms.loc/admin/pages/create
+---
+2014/10/23 12:53:44 [warning] [application] Не удалось присвоить небезопасный атрибут "min_resize" класса "Pages".
+in X:\home\dcms.loc\www\protected\modules\admin\controllers\PagesController.php (44)
+in X:\home\dcms.loc\www\index.php (13)
+2014/10/23 12:53:44 [warning] [application] Не удалось присвоить небезопасный атрибут "type_resize" класса "Pages".
+in X:\home\dcms.loc\www\protected\modules\admin\controllers\PagesController.php (44)
+in X:\home\dcms.loc\www\index.php (13)
+2014/10/23 12:53:44 [warning] [application] Не удалось присвоить небезопасный атрибут "thumb" класса "Pages".
+in X:\home\dcms.loc\www\protected\modules\admin\controllers\PagesController.php (44)
+in X:\home\dcms.loc\www\index.php (13)
+2014/10/23 12:53:49 [error] [exception.CHttpException.403] exception 'CHttpException' with message 'У вас недостаточно прав для выполнения указанного действия.' in X:\home\framework\web\auth\CAccessControlFilter.php:182
+Stack trace:
+#0 X:\home\framework\web\auth\CAccessControlFilter.php(145): CAccessControlFilter->accessDenied(Object(CWebUser), '?? ?????? ?????...')
+#1 X:\home\framework\web\filters\CFilter.php(38): CAccessControlFilter->preFilter(Object(CFilterChain))
+#2 X:\home\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#3 X:\home\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#4 X:\home\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#5 X:\home\framework\web\CController.php(291): CFilterChain->run()
+#6 X:\home\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#7 X:\home\framework\web\CWebApplication.php(282): CController->run('getallgallery')
+#8 X:\home\framework\web\CWebApplication.php(141): CWebApplication->runController('admin/ajax/geta...')
+#9 X:\home\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#10 X:\home\dcms.loc\www\index.php(13): CApplication->run()
+#11 {main}
+REQUEST_URI=/admin/ajax/getallgallery
+HTTP_REFERER=http://dcms.loc/admin/pages/update/id/7
+---
+2014/10/23 12:53:58 [error] [exception.CHttpException.403] exception 'CHttpException' with message 'У вас недостаточно прав для выполнения указанного действия.' in X:\home\framework\web\auth\CAccessControlFilter.php:182
+Stack trace:
+#0 X:\home\framework\web\auth\CAccessControlFilter.php(145): CAccessControlFilter->accessDenied(Object(CWebUser), '?? ?????? ?????...')
+#1 X:\home\framework\web\filters\CFilter.php(38): CAccessControlFilter->preFilter(Object(CFilterChain))
+#2 X:\home\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#3 X:\home\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#4 X:\home\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#5 X:\home\framework\web\CController.php(291): CFilterChain->run()
+#6 X:\home\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#7 X:\home\framework\web\CWebApplication.php(282): CController->run('getallgallery')
+#8 X:\home\framework\web\CWebApplication.php(141): CWebApplication->runController('admin/ajax/geta...')
+#9 X:\home\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#10 X:\home\dcms.loc\www\index.php(13): CApplication->run()
+#11 {main}
+REQUEST_URI=/admin/ajax/getallgallery
+HTTP_REFERER=http://dcms.loc/admin/items/create
+---
+2014/10/23 12:54:08 [warning] [application] Не удалось присвоить небезопасный атрибут "min_resize" класса "Items".
+in X:\home\dcms.loc\www\protected\modules\admin\controllers\ItemsController.php (48)
+in X:\home\dcms.loc\www\index.php (13)
+2014/10/23 12:54:08 [warning] [application] Не удалось присвоить небезопасный атрибут "type_resize" класса "Items".
+in X:\home\dcms.loc\www\protected\modules\admin\controllers\ItemsController.php (48)
+in X:\home\dcms.loc\www\index.php (13)
+2014/10/23 12:54:08 [warning] [application] Не удалось присвоить небезопасный атрибут "thumb" класса "Items".
+in X:\home\dcms.loc\www\protected\modules\admin\controllers\ItemsController.php (48)
+in X:\home\dcms.loc\www\index.php (13)
+2014/10/23 12:54:13 [error] [exception.CHttpException.403] exception 'CHttpException' with message 'У вас недостаточно прав для выполнения указанного действия.' in X:\home\framework\web\auth\CAccessControlFilter.php:182
+Stack trace:
+#0 X:\home\framework\web\auth\CAccessControlFilter.php(145): CAccessControlFilter->accessDenied(Object(CWebUser), '?? ?????? ?????...')
+#1 X:\home\framework\web\filters\CFilter.php(38): CAccessControlFilter->preFilter(Object(CFilterChain))
+#2 X:\home\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#3 X:\home\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#4 X:\home\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#5 X:\home\framework\web\CController.php(291): CFilterChain->run()
+#6 X:\home\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#7 X:\home\framework\web\CWebApplication.php(282): CController->run('getallgallery')
+#8 X:\home\framework\web\CWebApplication.php(141): CWebApplication->runController('admin/ajax/geta...')
+#9 X:\home\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#10 X:\home\dcms.loc\www\index.php(13): CApplication->run()
+#11 {main}
+REQUEST_URI=/admin/ajax/getallgallery
+HTTP_REFERER=http://dcms.loc/admin/items/update/id/9
+---
+2014/10/23 12:54:25 [error] [exception.CHttpException.403] exception 'CHttpException' with message 'У вас недостаточно прав для выполнения указанного действия.' in X:\home\framework\web\auth\CAccessControlFilter.php:182
+Stack trace:
+#0 X:\home\framework\web\auth\CAccessControlFilter.php(145): CAccessControlFilter->accessDenied(Object(CWebUser), '?? ?????? ?????...')
+#1 X:\home\framework\web\filters\CFilter.php(38): CAccessControlFilter->preFilter(Object(CFilterChain))
+#2 X:\home\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#3 X:\home\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#4 X:\home\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#5 X:\home\framework\web\CController.php(291): CFilterChain->run()
+#6 X:\home\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#7 X:\home\framework\web\CWebApplication.php(282): CController->run('getallgallery')
+#8 X:\home\framework\web\CWebApplication.php(141): CWebApplication->runController('admin/ajax/geta...')
+#9 X:\home\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#10 X:\home\dcms.loc\www\index.php(13): CApplication->run()
+#11 {main}
+REQUEST_URI=/admin/ajax/getallgallery
+HTTP_REFERER=http://dcms.loc/admin/pages/create
+---
+2014/10/23 12:54:32 [warning] [application] Не удалось присвоить небезопасный атрибут "min_resize" класса "Pages".
+in X:\home\dcms.loc\www\protected\modules\admin\controllers\PagesController.php (44)
+in X:\home\dcms.loc\www\index.php (13)
+2014/10/23 12:54:32 [warning] [application] Не удалось присвоить небезопасный атрибут "type_resize" класса "Pages".
+in X:\home\dcms.loc\www\protected\modules\admin\controllers\PagesController.php (44)
+in X:\home\dcms.loc\www\index.php (13)
+2014/10/23 12:54:32 [warning] [application] Не удалось присвоить небезопасный атрибут "thumb" класса "Pages".
+in X:\home\dcms.loc\www\protected\modules\admin\controllers\PagesController.php (44)
+in X:\home\dcms.loc\www\index.php (13)
+2014/10/23 12:54:36 [error] [exception.CHttpException.403] exception 'CHttpException' with message 'У вас недостаточно прав для выполнения указанного действия.' in X:\home\framework\web\auth\CAccessControlFilter.php:182
+Stack trace:
+#0 X:\home\framework\web\auth\CAccessControlFilter.php(145): CAccessControlFilter->accessDenied(Object(CWebUser), '?? ?????? ?????...')
+#1 X:\home\framework\web\filters\CFilter.php(38): CAccessControlFilter->preFilter(Object(CFilterChain))
+#2 X:\home\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#3 X:\home\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#4 X:\home\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#5 X:\home\framework\web\CController.php(291): CFilterChain->run()
+#6 X:\home\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#7 X:\home\framework\web\CWebApplication.php(282): CController->run('getallgallery')
+#8 X:\home\framework\web\CWebApplication.php(141): CWebApplication->runController('admin/ajax/geta...')
+#9 X:\home\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#10 X:\home\dcms.loc\www\index.php(13): CApplication->run()
+#11 {main}
+REQUEST_URI=/admin/ajax/getallgallery
+HTTP_REFERER=http://dcms.loc/admin/pages/update/id/8
+---
+2014/10/23 12:54:48 [warning] [application] Не удалось присвоить небезопасный атрибут "item" класса "Pages".
+in X:\home\dcms.loc\www\protected\modules\admin\controllers\PagesController.php (88)
+in X:\home\dcms.loc\www\index.php (13)
+2014/10/23 12:54:53 [warning] [application] Не удалось присвоить небезопасный атрибут "item" класса "Pages".
+in X:\home\dcms.loc\www\protected\modules\admin\controllers\PagesController.php (88)
+in X:\home\dcms.loc\www\index.php (13)
+2014/10/23 12:54:57 [warning] [application] Не удалось присвоить небезопасный атрибут "item" класса "Pages".
+in X:\home\dcms.loc\www\protected\modules\admin\controllers\PagesController.php (88)
+in X:\home\dcms.loc\www\index.php (13)

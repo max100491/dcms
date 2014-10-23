@@ -4,7 +4,6 @@ $this->breadcrumbs=array(
 	'Manage',
 );
 
-echo '';
 
 $this->menu=array(
 	array('label'=>'<i class="icon-file icon-white" title="Создать"></i>','url'=>array('create')),
@@ -31,6 +30,7 @@ $this->widget('bootstrap.widgets.TbGridView',array(
         'item'=>array(
             'name'=>'item',
             'type'=>'html',
+            'filter'=> Items::getList(),
             'value'=>'Pages::model()->getCategory($data->items)',
         ),
         'date_publication'=>array(

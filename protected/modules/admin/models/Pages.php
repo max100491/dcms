@@ -73,7 +73,7 @@ class Pages extends CActiveRecord
             
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id_page, name_page, brief_text_page, text_page, slug_page, date_created, date_publication, user_id, status_id', 'safe', 'on'=>'search'),
+			array('id_page, name_page, brief_text_page, text_page, slug_page, date_created, date_publication, user_id, status_id, item', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -131,6 +131,7 @@ class Pages extends CActiveRecord
 
 		$criteria=new CDbCriteria;
         $criteria->order = 'id_page DESC';
+        $criteria->with = array('items'=>array('together'=>true));
 
 		$criteria->compare('id_page',$this->id_page);
 		$criteria->compare('name_page',$this->name_page,true);
@@ -141,6 +142,7 @@ class Pages extends CActiveRecord
 		$criteria->compare('date_publication',$this->date_publication,true);
 		$criteria->compare('user_id',$this->user_id);
 		$criteria->compare('status_id',$this->status_id);
+        $criteria->compare('items.id_item',$this->item);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
