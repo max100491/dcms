@@ -30,7 +30,7 @@ $this->widget('bootstrap.widgets.TbGridView',array(
         'item'=>array(
             'name'=>'item',
             'type'=>'html',
-            'filter'=> Items::getList(),
+            'filter'=> Items::model()->getList(),
             'value'=>'Pages::model()->getCategory($data->items)',
         ),
         'date_publication'=>array(
