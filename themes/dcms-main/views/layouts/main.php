@@ -18,24 +18,24 @@
   <body>
     <div class="container">
         <?php 
-        $this->widget('bootstrap.widgets.TbNavbar', array(
-            'type'=>'inverse', // null or 'inverse'
-            'brand'=>false,
-            'brandUrl'=>'#',
-            'collapse'=>true, // requires bootstrap-responsive.css
-            'items'=>array(
-                array(
-                    'class'=>'bootstrap.widgets.TbMenu',
-                    'items'=>Menu::model()->getItemMenuId(1),
-                ),
-            ),
-        )); 
+        // $this->widget('bootstrap.widgets.TbNavbar', array(
+        //     'type'=>'inverse', // null or 'inverse'
+        //     'brand'=>false,
+        //     'brandUrl'=>'#',
+        //     'collapse'=>true, // requires bootstrap-responsive.css
+        //     'items'=>array(
+        //         array(
+        //             'class'=>'bootstrap.widgets.TbMenu',
+        //             'items'=>Menu::model()->getItemMenuId(1),
+        //         ),
+        //     ),
+        // )); 
         ?>
         <?php if(SiteOptions::model()->getOptionsBul('bread')):?>
         <div style="margin-top: 60px;">
-            <?php $this->widget('bootstrap.widgets.TbBreadcrumbs', array(
+            <?php /*$this->widget('bootstrap.widgets.TbBreadcrumbs', array(
                 'links'=>$this->breadcrumbs,
-            )); ?>
+            )); */?>
         </div>
         <?php endif;?>
         <div class="content">

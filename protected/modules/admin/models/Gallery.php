@@ -120,5 +120,16 @@ class Gallery extends CActiveRecord
         rmdir($this->path.'/'.$this->folder_gallery);
         return parent::beforeDelete();
     }
+
+    public function resizeImage()
+    {
+        // 'value'=>'name'
+        // '200x200'=>'Загрузка миниатюр'
+        return array_merge(Yii::app()->params['resizeImage'],
+            array(
+                '200x200'=>'Загрузка миниатюр'
+            )
+        );
+    }
     
 }

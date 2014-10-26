@@ -78,5 +78,8 @@ return array(
 	'params'=>array(
 		'email'=>'webmaster@mail.ru',
         'adminEmail'=>'webmaster@mail.ru',
+        'resizeImage'=>array(
+            '150x150'=>'Общие миниатюры'
+        ),
 	),
 );

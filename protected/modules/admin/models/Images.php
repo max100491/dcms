@@ -13,8 +13,9 @@
  */
 class Images extends CActiveRecord
 {
-    public $path;
     public $folder;
+    public $qqfile;
+    public $pathOriginal;
 	/**
 	 * Returns the static model of the specified AR class.
 	 * @param string $className active record class name.
@@ -44,7 +45,8 @@ class Images extends CActiveRecord
 		return array(
 			array('name_img', 'required'),
 			array('model_id, fk_id, sort_img, is_root', 'numerical', 'integerOnly'=>true),
-			array('name_img, alt_img', 'length', 'max'=>255),
+			array('name_img, alt_img, folder', 'length', 'max'=>255),
+			array('folder, qqfile', 'safe'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
 			array('id_img, model_id, fk_id, name_img, alt_img, sort_img', 'safe', 'on'=>'search'),
@@ -102,12 +104,53 @@ class Images extends CActiveRecord
 		));
 	}
     
-    public function beforeDelete()
-    {
-        $this->path = Yii::getPathOfAlias('webroot.upload.images').'/';
-        if(file_exists($this->path.$this->name_img)){
-            unlink($this->path.$this->name_img);
-        }
-        return parent::beforeDelete();
-    }
+	public function beforeDelete()
+	{
+		if(file_exists($this->path.$this->name_img)){
+			unlink($this->path.$this->name_img);
+		}
+		return parent::beforeDelete();
+	}
+
+	public function beforeSave()
+	{
+		$path = Yii::getPathOfAlias('webroot.upload.images');
+		$this->pathOriginal = $path.DIRECTORY_SEPARATOR.$this->folder.DIRECTORY_SEPARATOR;
+		echo $this->pathOriginal.$this->qqfile;
+
+		if ($this->isNewRecord) {
+			$thumb = Yii::app()->phpThumb->create($this->pathOriginal.$this->qqfile);
+			$thumb->resize(900, 900);
+			$thumb->save($this->pathOriginal.$this->name_img);
+			unlink($this->pathOriginal.$this->qqfile);
+			$this->thumpAdmin();
+		}
+		return parent::beforeSave();
+	}
+
+	public function thumpAdmin()
+	{
+		$thumb = Yii::app()->phpThumb->create($this->pathOriginal.$this->name_img);
+		$thumb->adaptiveResize(96, 96);
+		$thumb->save($this->pathOriginal.'admin'.DIRECTORY_SEPARATOR.$this->name_img);
+	}
+
+
+	public function resizeImg($path, $filename)
+	{
+		$minResize = $_POST['Gallery']['min_resize'];
+		$typeResize = $_POST['Gallery']['type_resize'];
+		if($minResize != ''){
+			$size = explode('x', $minResize);
+			if($typeResize == 'resize'){
+				$thumb = Yii::app()->phpThumb->create($path.$filename);
+				$thumb->resize($size[0], $size[1]);
+				$thumb->save($path.'thumb/'.$filename);
+			}elseif($typeResize == 'adaptive'){
+				$thumb = Yii::app()->phpThumb->create($path.$filename);
+				$thumb->adaptiveResize($size[0], $size[1]);
+				$thumb->save($path.'thumb/'.$filename);
+			}
+		}
+	}
 }

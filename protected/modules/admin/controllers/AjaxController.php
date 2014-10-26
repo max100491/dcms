@@ -1,9 +1,22 @@
 <?php
 class AjaxController extends MController
 {
+    public function accessRules()
+    {
+        return array(
+            array('allow', // allow admin user to perform 'admin' and 'delete' actions
+                'actions'=>array('upload'),
+                'users'=>array('admin'),
+            ),
+            array('deny',  // deny all users
+                'users'=>array('*'),
+            ),
+        );
+    }
+
     public function actionDeletegridimg()
     {
-        print_r($_POST);
+        print_r($_GET);
     }
     
     public function actionUpdateimage()
@@ -67,6 +80,47 @@ class AjaxController extends MController
             ->join('cf_images i', 't.id_gallery=i.fk_id and i.is_root = 1')
             ->queryAll();
         echo CJSON::encode($gallery);
+    }
+
+    public function actionUpload()
+    {
+        if (Yii::app()->request->isAjaxRequest) {
+            
+            $model = new Images;
+            $model->setAttributes($_GET);
+            
+            Yii::import("ext.EAjaxUpload.qqFileUploader");
+
+            $ds = DIRECTORY_SEPARATOR;
+
+            $pathOfImage = $model->pathOriginal.$_GET['qqfile']; // путь до файла
+
+            $folder = 'upload'.$ds.'images'.$ds.$_GET['folder'].$ds;
+            $allowedExtensions = $_GET['allowedExtensions'];
+            $sizeLimit = $_GET['sizeLimit'];
+
+            $uploader = new qqFileUploader($allowedExtensions, $sizeLimit);
+            $result = $uploader->handleUpload($folder);
+
+            $pathInfo = pathinfo($pathOfImage); // информация о загруженном файле
+
+            $name_img = uniqid().'.'.$pathInfo['extension'];
+
+            $model->name_img = $name_img;
+            $model->alt_img = $pathInfo['filename'];
+            $model->sort_img = 0;
+            $model->is_root = 0;
+            if ($model->save()) {
+                
+            }else{
+                if (!isset($result['error']))
+                    $result['error'] = $model->errors;
+            }
+
+            $result=htmlspecialchars(json_encode($result), ENT_NOQUOTES);
+            echo $result;
+
+        }
     }
     
 }
