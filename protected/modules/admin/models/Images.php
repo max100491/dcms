@@ -1,128 +1,59 @@
 <?php
 
-/**
- * This is the model class for table "cf_images".
- *
- * The followings are the available columns in table 'cf_images':
- * @property integer $id_img
- * @property integer $model_id
- * @property integer $fk_id
- * @property string $name_img
- * @property string $alt_img
- * @property integer $sort_img
- */
 class Images extends CActiveRecord
 {
     public $folder;
     public $qqfile;
-    public $pathOriginal;
-	/**
-	 * Returns the static model of the specified AR class.
-	 * @param string $className active record class name.
-	 * @return Images the static model class
-	 */
+    public $originalPath;
+    public $path;
           
 	public static function model($className=__CLASS__)
 	{
 		return parent::model($className);
 	}
 
-	/**
-	 * @return string the associated database table name
-	 */
 	public function tableName()
 	{
 		return 'cf_images';
 	}
 
-	/**
-	 * @return array validation rules for model attributes.
-	 */
 	public function rules()
 	{
-		// NOTE: you should only define rules for those attributes that
-		// will receive user inputs.
 		return array(
 			array('name_img', 'required'),
 			array('model_id, fk_id, sort_img, is_root', 'numerical', 'integerOnly'=>true),
 			array('name_img, alt_img, folder', 'length', 'max'=>255),
 			array('folder, qqfile', 'safe'),
-			// The following rule is used by search().
-			// Please remove those attributes that should not be searched.
 			array('id_img, model_id, fk_id, name_img, alt_img, sort_img', 'safe', 'on'=>'search'),
 		);
 	}
 
-	/**
-	 * @return array relational rules.
-	 */
-	public function relations()
-	{
-		// NOTE: you may need to adjust the relation name and the related
-		// class name for the relations automatically generated below.
-		return array(
-            'gallery'=>array(self::BELONGS_TO, 'Gallery', 'fk_id'),
-		);
-	}
-
-	/**
-	 * @return array customized attribute labels (name=>label)
-	 */
-	public function attributeLabels()
-	{
-		return array(
-			'id_img' => '#',
-			'model_id' => 'Модель',
-			'fk_id' => 'Внешний ключ',
-			'name_img' => 'Имя изображения',
-			'alt_img' => 'Описание',
-			'sort_img' => 'Сортировка',
-            'is_root'=>'Флаг на привьюшку',
-		);
-	}
-
-	/**
-	 * Retrieves a list of models based on the current search/filter conditions.
-	 * @return CActiveDataProvider the data provider that can return the models based on the search/filter conditions.
-	 */
-	public function search()
-	{
-		// Warning: Please modify the following code to remove attributes that
-		// should not be searched.
-
-		$criteria=new CDbCriteria;
-
-		$criteria->compare('id_img',$this->id_img);
-		$criteria->compare('model_id',$this->model_id);
-		$criteria->compare('fk_id',$this->fk_id);
-		$criteria->compare('name_img',$this->name_img,true);
-		$criteria->compare('alt_img',$this->alt_img,true);
-		$criteria->compare('sort_img',$this->sort_img);
-
-		return new CActiveDataProvider($this, array(
-			'criteria'=>$criteria,
-		));
-	}
-    
 	public function beforeDelete()
 	{
-		if(file_exists($this->path.$this->name_img)){
-			unlink($this->path.$this->name_img);
-		}
+		$this->path = Yii::getPathOfAlias('webroot.upload.images');
+		$this->originalPath = $this->path.DIRECTORY_SEPARATOR.$this->folder.DIRECTORY_SEPARATOR;
+
+		if(file_exists($this->originalPath.$this->name_img))
+            unlink($this->originalPath.$this->name_img);
+
+        if(file_exists($this->originalPath.'admin'.DIRECTORY_SEPARATOR.$this->name_img))
+            unlink($this->originalPath.'admin'.DIRECTORY_SEPARATOR.$this->name_img);
+
+        if(file_exists($this->originalPath.'thumb'.DIRECTORY_SEPARATOR.$this->name_img))
+            unlink($this->originalPath.'thumb'.DIRECTORY_SEPARATOR.$this->name_img);
+
 		return parent::beforeDelete();
 	}
 
 	public function beforeSave()
 	{
-		$path = Yii::getPathOfAlias('webroot.upload.images');
-		$this->pathOriginal = $path.DIRECTORY_SEPARATOR.$this->folder.DIRECTORY_SEPARATOR;
-		echo $this->pathOriginal.$this->qqfile;
-
+		$this->path = Yii::getPathOfAlias('webroot.upload.images');
+		$this->originalPath = $this->path.DIRECTORY_SEPARATOR.$this->folder.DIRECTORY_SEPARATOR;
 		if ($this->isNewRecord) {
-			$thumb = Yii::app()->phpThumb->create($this->pathOriginal.$this->qqfile);
+			$thumb = Yii::app()->phpThumb->create($this->originalPath.$this->qqfile);
 			$thumb->resize(900, 900);
-			$thumb->save($this->pathOriginal.$this->name_img);
-			unlink($this->pathOriginal.$this->qqfile);
+			$thumb->save($this->originalPath.$this->name_img);
+			unlink($this->originalPath.$this->qqfile);
 			$this->thumpAdmin();
 		}
 		return parent::beforeSave();
@@ -130,9 +61,9 @@ class Images extends CActiveRecord
 
 	public function thumpAdmin()
 	{
-		$thumb = Yii::app()->phpThumb->create($this->pathOriginal.$this->name_img);
+		$thumb = Yii::app()->phpThumb->create($this->originalPath.$this->name_img);
 		$thumb->adaptiveResize(96, 96);
-		$thumb->save($this->pathOriginal.'admin'.DIRECTORY_SEPARATOR.$this->name_img);
+		$thumb->save($this->originalPath.'admin'.DIRECTORY_SEPARATOR.$this->name_img);
 	}
 
 

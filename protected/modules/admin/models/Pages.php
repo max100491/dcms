@@ -26,6 +26,7 @@ class Pages extends CActiveRecord
     public $min_resize;
     public $type_resize;
     public $item;
+    public $folderImages = 'pages';
 	/**
 	 * Returns the static model of the specified AR class.
 	 * @param string $className active record class name.
@@ -177,64 +178,12 @@ class Pages extends CActiveRecord
     
     protected function afterFind()
     {
-        //$this->date_publication = Yii::app()->dateFormatter->format('dd-MM-yyyy', $this->date_publication);
         return parent::afterFind();
     }
     
     
     protected function afterSave()
     {
-        // загрузка миниатюры
-        $thumb = CUploadedFile::getInstance($this, 'thumb');
-        if(!empty($thumb))
-        {
-            $fileType = explode('.', $thumb->name);
-            $fileName = uniqid();
-            $fileName = $fileName.'.'.$fileType[1];
-            
-            if($thumb->saveAs($this->path.$fileName))
-            {
-                if(!empty($this->thumbroot)){
-                    if(file_exists($this->path.$this->thumbroot->name_img)){
-                        unlink($this->path.$this->thumbroot->name_img);
-                    }
-                    if(file_exists($this->path.'admin/'.$this->thumbroot->name_img)){
-                        unlink($this->path.'admin/'.$this->thumbroot->name_img);
-                    }
-                    if(file_exists($this->path.'thumb/'.$this->thumbroot->name_img)){
-                        unlink($this->path.'thumb/'.$this->thumbroot->name_img);
-                    }
-                    $this->thumbroot->delete();
-                }
-                $model = new Images;
-                $model->model_id = 1;
-                $model->fk_id = $this->id_page;
-                $model->name_img = $fileName;
-                $model->alt_img = $fileType[0];
-                $model->sort_img = 1;
-                $model->is_root = 1;
-
-                if($model->save()){
-                    $thumb = Yii::app()->phpThumb->create($this->path.$fileName);
-                    $thumb->resize(100, 100);
-                    $thumb->save($this->path.'admin/'.$fileName);
-                    $minResize = $_POST['Pages']['min_resize'];
-                    $typeResize = $_POST['Pages']['type_resize'];
-                    if($minResize != ''){
-                        $size = explode('x', $minResize);
-                        if($typeResize == 'resize'){
-                            $thumb = Yii::app()->phpThumb->create($this->path.$fileName);
-                            $thumb->resize($size[0], $size[1]);
-                            $thumb->save($this->path.'thumb/'.$fileName);
-                        }elseif($typeResize == 'adaptive'){
-                            $thumb = Yii::app()->phpThumb->create($this->path.$fileName);
-                            $thumb->adaptiveResize($size[0], $size[1]);
-                            $thumb->save($this->path.'thumb/'.$fileName);
-                        }
-                    }
-                }
-            }
-        }
         return parent::afterSave();
     }
     
@@ -277,5 +226,16 @@ class Pages extends CActiveRecord
             $this->kay_meta = $this->meta->kay_meta;
             $this->name_meta = $this->meta->name_meta;
         }
+    }
+
+    public function resizeImage()
+    {
+        // 'value'=>'name'
+        // '200x200'=>'Загрузка миниатюр'
+        return array_merge(Yii::app()->params['resizeImage'],
+            array(
+                '200x200'=>'Загрузка миниатюр'
+            )
+        );
     }
 }

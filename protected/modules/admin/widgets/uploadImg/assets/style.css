@@ -1,0 +1,35 @@
+.list-image{
+}
+.list-image ul{
+    list-style: none;
+    margin: 0px;
+    padding: 0px;
+}
+.list-image ul li{
+    width: 96px;
+    height: 96px;
+    float: left;
+    position: relative;
+    margin: 5px;
+}
+.list-image ul li.active{
+    border: 3px solid #D94E48;
+    width: 90px;
+    height: 90px;
+}
+.image-panel{
+    position: absolute;
+    top: 0;
+    right: 0;
+    background: #e1e1e1;
+}
+.list-image ul li img{
+}
+
+.loading{
+    position: absolute;
+    top: 0;
+    z-index: 10;
+    background: url('ajax-loader.gif') no-repeat 30px 30px #000;
+    opacity: 0.6;
+}

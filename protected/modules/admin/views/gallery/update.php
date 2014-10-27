@@ -12,4 +12,4 @@ $this->menu=array(
 $this->title = 'Редактировать'
 
 ?>
-<?php echo $this->renderPartial('_form',array('model'=>$model, 'upload'=>$upload)); ?>
+<?php echo $this->renderPartial('_form',array('model'=>$model)); ?>

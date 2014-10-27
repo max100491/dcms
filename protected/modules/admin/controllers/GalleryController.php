@@ -64,23 +64,17 @@ class GalleryController extends MController
 	public function actionUpdate($id)
 	{
 		$model=$this->loadModel($id);
-        $upload = new UploadImages;
 
 		if(isset($_POST['Gallery']))
 		{
 			$model->attributes=$_POST['Gallery'];
-			if($model->save())
-                $upload->saveImg($model, 'images');
-                $upload->updateResize($model);
-                
-                if(empty($upload->errors)){
-                    $this->redirect(array('update','id'=>$model->id_gallery));
-                }
+			if($model->save()){
+
+			}
 		}
 
 		$this->render('update',array(
 			'model'=>$model,
-            'upload'=>$upload,
 		));
 	}
 

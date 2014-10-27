@@ -1,25 +1,7 @@
 <?php
 
 class ImagesController extends MController
-{
-    /**
-     * @var string.
-     */
-    public $insertNull = 'N$';
-    public $idCheckBoxColumn = 'checkboxlist';
-    public $idButtonUpdateAll = 'updateall';
-    public $idLinkDeleteAll = 'deleteallelements';
-
-    public function actions()
-    {
-        return array(
-            'delete'=>array(
-                'class'=>'DeleteAction',
-                'modelClass'=>'Images'
-            )
-        );
-    }
-    
+{    
 	public function filters()
 	{
 		return array(
@@ -31,7 +13,7 @@ class ImagesController extends MController
 	{
 		return array(
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
-				'actions'=>array('admin','delete', 'create','update'),
+				'actions'=>array('delete', 'upload', 'resize'),
 				'users'=>array('admin'),
 			),
 			array('deny',  // deny all users
@@ -40,183 +22,73 @@ class ImagesController extends MController
 		);
 	}
 
-	/**
-	 * Creates a new model.
-	 * If creation is successful, the browser will be redirected to the 'view' page.
-	 */
-	public function actionCreate()
-	{
-		$model=new Images;
+    public function actionDelete($id, $folder)
+    {
+        if (Yii::app()->request->isAjaxRequest) {
+            $model = Images::model()->findByPk($id);
+            echo $model->folder = $folder;
+            if($model->delete())
+                echo 'success';
+            else
+                echo 'error';
+        }
+    }
 
-		// Uncomment the following line if AJAX validation is needed
-		// $this->performAjaxValidation($model);
-
-		if(isset($_POST['Images']))
-		{
-			$model->attributes=$_POST['Images'];
-			if($model->save())
-				$this->redirect(array('update','id'=>$model->id_img));
-		}
-
-		$this->render('create',array(
-			'model'=>$model,
-		));
-	}
-
-	/**
-	 * Updates a particular model.
-	 * If update is successful, the browser will be redirected to the 'view' page.
-	 * @param integer $id the ID of the model to be updated
-	 */
-	public function actionUpdate($id)
-	{
-		$model=$this->loadModel($id);
-
-		// Uncomment the following line if AJAX validation is needed
-		// $this->performAjaxValidation($model);
-
-		if(isset($_POST['Images']))
-		{
-			$model->attributes=$_POST['Images'];
-			if($model->save())
-				$this->redirect(array('update','id'=>$model->id_img));
-		}
-
-		$this->render('update',array(
-			'model'=>$model,
-		));
-	}
-
-	/**
-	 * Manages all models.
-	 */
-	public function actionAdmin()
-	{
-		$model=new Images('search');
-		$model->unsetAttributes();  // clear any default values
-		if(isset($_GET['Images']))
-			$model->attributes=$_GET['Images'];
-
-		$this->render('admin',array(
-			'model'=>$model,
-		));
-	}
-
-	/**
-	 * Returns the data model based on the primary key given in the GET variable.
-	 * If the data model is not found, an HTTP exception will be raised.
-	 * @param integer the ID of the model to be loaded
-	 */
-	public function loadModel($id)
-	{
-		$model=Images::model()->findByPk($id);
-		if($model===null)
-			throw new CHttpException(404,'The requested page does not exist.');
-		return $model;
-	}
-
-	/**
-	 * Performs the AJAX validation.
-	 * @param CModel the model to be validated
-	 */
-	protected function performAjaxValidation($model)
-	{
-		if(isset($_POST['ajax']) && $_POST['ajax']==='images-form')
-		{
-			echo CActiveForm::validate($model);
-			Yii::app()->end();
-		}
-	}
-    
     public function actionUpload()
     {
-        $model=new UploadImages;
-		if(isset($_POST['UploadImages']))
-		{
-            $model->images = CUploadedFile::getInstances($model, 'images');
-            $path = Yii::getPathOfAlias('webroot.upload.images').'/';
-            foreach($model->images as $kay=>$image){
-                $model->image = $image;
-                $fileType = explode('.', $image->name);
-                $filename = uniqid();
-                $filename = $filename.'.'.$fileType[1];
-                $model->attributes = $_POST['UploadImages'];
-                $model->name_img = $filename;
-                $model->alt_img = $fileType[0];
-                if($model->save()){
-                    $image->saveAs($path.$filename);
-                }
-                $model->id_img = false;
-                $model->isNewRecord = true;
-            }
-		}
-        $this->render('upload', array(
-            'model'=>$model,
-        ));
-    }
-    
-    /**
-     * Массовое удаление элементов.
-     */
-    
-    public function actionDeletechecked()
-    {
-     if (isset($_POST[$this->idCheckBoxColumn]))
-      { 
-        foreach ($_POST[$this->idCheckBoxColumn] as $id)
-        $this->loadModel($id)->delete();
-        echo 'Выбранные элементы успешно удалены. Подождите пока журнал обновится.';
-        return;
-    }
-    echo 'Элементы не выбраны.';
-    return;
-       }
-    
-    /**
-     * @return array возвращает настройки ajax под id элемента.
-     */
-    
-     public function ajaxQueryById($id,$switch = 'link')
-    {
-        if ($id == null || !is_string($id)) return;
-        if ($switch == 'submit')
-        {   $data = '"button=OK&" + $(\'#categories-form, input[name="'.$this->idCheckBoxColumn.'[]"]:checked\').serialize()';
-            $id = '#categories-form #'.$id;
-        }   else 
-        {   $data = '$(\'input[name="[]"]:checked\').serialize()';
-            $id = '#'.$id;
+        if (Yii::app()->request->isAjaxRequest) {
+            
+            $model = new Images;
+            $model->setAttributes($_GET);
+            
+            Yii::import("ext.EAjaxUpload.qqFileUploader");
+
+            $ds = DIRECTORY_SEPARATOR;
+
+            $pathOfImage = $model->originalPath.$_GET['qqfile']; // путь до файла
+
+            $folder = 'upload'.$ds.'images'.$ds.$_GET['folder'].$ds;
+            $allowedExtensions = $_GET['allowedExtensions'];
+            $sizeLimit = $_GET['sizeLimit'];
+
+            $uploader = new qqFileUploader($allowedExtensions, $sizeLimit);
+            $result = $uploader->handleUpload($folder);
+
+            $pathInfo = pathinfo($pathOfImage); // информация о загруженном файле
+
+            $name_img = uniqid().'.'.$pathInfo['extension'];
+
+            $model->name_img = $name_img;
+            $model->alt_img = $pathInfo['filename'];
+            $model->sort_img = 0;
+            $model->is_root = 0;
+            $model->save();
+            
+            $result=CJSON::encode($result);
+            echo $result;
+
         }
-        $array = array(
-    'type'=>'post',
-    'beforeSend'=>'function(){'.self::blockUnButton($id,'true').'}',
-    'error'=>'function(xhr, status){alert(\'Ошибка отправки.\'); '.self::blockUnButton($id).'}',
-    'data'=>'js: '.$data,
-    'success'=>'function(data){$(\'#categories-grid\').yiiGridView(\'update\'); alert(data); '.self::blockUnButton($id).'}');
-    return $array;   
     }
-    
-    /**
-     * @return string генерирует код блокировки и разблокировки кнопок.
-     */
-    
-    public static function blockUnButton($id,$block = 'false')
+
+    public function actionResize()
     {
-     return ' $(\''.$id.'\').prop(\'disabled\','.$block.');';  
+        if(count($_POST) == 4){
+            $size = $_POST['size'];
+            $resize = $_POST['resize'];
+            $filename = $_POST['file'];
+            $size = explode('x', $size);
+            $path = Yii::getPathOfAlias('webroot.upload.images').DIRECTORY_SEPARATOR.$_POST['folder'].DIRECTORY_SEPARATOR;
+            if($resize == 'resize'){
+                $thumb = Yii::app()->phpThumb->create($path.$filename);
+                $thumb->resize($size[0], $size[1]);
+                $thumb->save($path.'thumb'.DIRECTORY_SEPARATOR.$filename);
+            }elseif($resize == 'adaptive'){
+                $thumb = Yii::app()->phpThumb->create($path.$filename);
+                $thumb->adaptiveResize($size[0], $size[1]);
+                $thumb->save($path.'thumb'.DIRECTORY_SEPARATOR.$filename);
+            }
+            echo 'ok';
+        }
     }
-    
-    /**
-     * @return boolean возвращает true если замена прошла успешно.
-     */
-    
-    protected function updateAll($pk,$attributes)
-    {
-    foreach ($attributes as $key=>$value)
-    if ($value == $this->insertNull) $array[$key] = null; 
-    elseif ($value != null) $array[$key] = $value; 
-    if ($array == null) return false;
-    Categories::model()->updateByPk($pk,$array);
-    unset ($array); unset($pk);
-    return true;
-    }
-    
+
 }

@@ -1,6 +1,8 @@
 <?php
 class Menu extends CActiveRecord
 {
+    public $folder_gallery = 'menu';
+
 	public static function model($className=__CLASS__)
 	{
 		return parent::model($className);
@@ -55,5 +57,16 @@ class Menu extends CActiveRecord
     {
         $model = self::model()->findAll();
         return CHtml::listData($model, 'id_menu', 'name_menu');
+    }
+
+    public function resizeImage()
+    {
+        // 'value'=>'name'
+        // '200x200'=>'Загрузка миниатюр'
+        return array_merge(Yii::app()->params['resizeImage'],
+            array(
+                '200x200'=>'Загрузка миниатюр'
+            )
+        );
     }
 }
