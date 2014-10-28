@@ -23,12 +23,14 @@ class MController extends CController
     public $button = array();
     
     public $saveButton = false;
+
+    public $pathAssets;
     
     public function init()
     {
         Yii::app()->clientScript->registerMetaTag('text/html; charset=utf-8');
         
-        $path = Yii::getPathOfAlias('application.modules.admin.assets');
+        $this->pathAssets = Yii::getPathOfAlias('application.modules.admin.assets');
         $pathTinyMCE = Yii::app()->assetManager->publish(Yii::getPathOfAlias('application.modules.admin.assets.js.tinymce'), true, -1, YII_DEBUG);
         Yii::app()->bootstrap->register();
         Yii::app()->getClientScript()->registerCoreScript( 'jquery.ui' );
@@ -39,12 +41,8 @@ class MController extends CController
         );
 
         $as = Yii::app()->clientScript;
-        $as->registerCssFile(
-            Yii::app()->assetManager->publish($path.'/css/style.css')
-        );
-        $as->registerScriptFile(
-            Yii::app()->assetManager->publish($path.'/js/main.js')
-        );
+        $as->registerCssFile(Yii::app()->assetManager->publish($this->pathAssets.'/css/style.css'));
+        $as->registerScriptFile(Yii::app()->assetManager->publish($this->pathAssets.'/js/main.js'));
 
         $as->registerScriptFile($pathTinyMCE.'/tinymce.dev.js');
 

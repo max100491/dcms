@@ -25,12 +25,11 @@ class Gallery extends CActiveRecord
 	{
 		return array(
             array('name_gallery, folder_gallery', 'required'),
-            array('is_gallery', 'numerical'),
+            array('id_gallery', 'numerical'),
             array('folder_gallery', 'unique'),
             array('folder_gallery', 'match', 'pattern'=>'/^[\w]+$/', 'message'=>'Недоступное имя для папки'),
 			array('name_gallery, folder_gallery', 'length', 'max'=>255),
 			array('min_resize, type_resize', 'length', 'max'=>100),
-			array('id_gallery, name_gallery, folder_gallery, min_resize, type_resize', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -48,33 +47,31 @@ class Gallery extends CActiveRecord
 	{
 		return array(
 			'id_gallery' => '#',
-			'name_gallery' => 'Имя',
-			'folder_gallery' => 'Папка',
+			'name_gallery' => 'Заголовок галереи',
+			'folder_gallery' => 'Папка (латинскими)',
 			'min_resize' => 'Миниатюры',
 			'type_resize' => 'Тип обрезки',
-            'is_gallery' => 'Использовать как галерею',
-            'images[]' => '',
 		);
 	}
 
+    public function search()
+    {
+        // Warning: Please modify the following code to remove attributes that
+        // should not be searched.
 
-	public function search()
-	{
-		$criteria=new CDbCriteria;
+        $criteria=new CDbCriteria;
+        $criteria->order = 'id_gallery DESC';
 
-		$criteria->compare('id_gallery',$this->id_gallery);
-		$criteria->compare('name_gallery',$this->name_gallery,true);
-		$criteria->compare('folder_gallery',$this->folder_gallery,true);
-		$criteria->compare('min_resize',$this->min_resize,true);
-		$criteria->compare('type_resize',$this->type_resize,true);
+        $criteria->compare('id_gallery',$this->id_gallery);
+        $criteria->compare('name_gallery',$this->name_gallery,true);
 
-		return new CActiveDataProvider($this, array(
-			'criteria'=>$criteria,
+        return new CActiveDataProvider($this, array(
+            'criteria'=>$criteria,
             'pagination'=>array(
                 'pagesize'=>20,
             ),
-		));
-	}
+        ));
+    }
     
     public function getList()
     {

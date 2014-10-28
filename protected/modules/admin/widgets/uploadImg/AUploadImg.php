@@ -11,7 +11,7 @@ class AUploadImg extends CWidget
     public $fk_id;
     public $model_id;
     public $folder = null;
-    public $allowedExtensions = array("jpg","jpeg","gif");
+    public $allowedExtensions = array("jpg","jpeg","gif",'png');
     public $sizeLimit;
     public $minSizeLimit;
     public $resize = array();
