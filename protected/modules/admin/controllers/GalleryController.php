@@ -44,7 +44,9 @@ class GalleryController extends MController
                 if($model->save()){
                     $node = new GalleryTree;
                     $root = GalleryTree::model()->findByPk($_POST['id']);
-                    $node->appendTo($root);
+                    if($node->appendTo($root)){
+                        echo 'Success';
+                    }
                 }
             }
 

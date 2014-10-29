@@ -17,9 +17,10 @@ class GalleryTree extends CActiveRecord
 	    return array(
 	        'nestedSetBehavior'=>array(
 	            'class'=>'application.behaviors.NestedSetBehavior',
-	            'leftAttribute'=>'lft',
-	            'rightAttribute'=>'rgt',
-	            'levelAttribute'=>'level',
+	            'leftAttribute' => 'lft',
+				'rightAttribute' => 'rgt',
+				'levelAttribute' => 'level',
+				'hasManyRoots' => true,
 	        ),
 	    );
 	}
@@ -27,9 +28,8 @@ class GalleryTree extends CActiveRecord
 	public function rules()
 	{
 		return array(
-			array('root, lft, rgt, level', 'required'),
-			array('root, lft, rgt, level', 'numerical', 'integerOnly'=>true),
-			array('id, root, lft, rgt, level', 'safe', 'on'=>'search'),
+			// array('root, lft, rgt, level', 'required'),
+			// array('root, lft, rgt, level', 'numerical', 'integerOnly'=>true),
 		);
 	}
 
