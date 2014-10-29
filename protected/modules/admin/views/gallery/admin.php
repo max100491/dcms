@@ -41,7 +41,7 @@ $this->menu=array(
 		    'actions' => array(
 		        'create' => $this->createUrl('gallery/create'),
 		        'move' => $this->createUrl('gallery/move'),
-		        'delete' => $this->createUrl('gallery/delete'),
+		        // 'delete' => $this->createUrl('gallery/delete'),
 		    ),
 
 		    'js_options' => array(

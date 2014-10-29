@@ -193,7 +193,11 @@
 
 					$('#add-gallery').live('click', function(){
 						$.post(opts.urls.create, $('form#gallery-form').serialize() + '&id=' + node.data.id, function(data){
-							modal.html(data);
+							if (data == "Success") {
+								modal.modal('hide')
+							} else {
+								modal.html(data);
+							}
 						})
 						return false;
 					});
