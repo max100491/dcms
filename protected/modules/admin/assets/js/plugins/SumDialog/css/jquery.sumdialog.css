@@ -1,0 +1,20 @@
+﻿
+/* SumDialog */
+.sum-dialog { position: absolute; display: none; padding: 3px; border: 1px solid #BBB; background: #EFEFEF; z-index: 1002; }
+.sum-title { padding: 0.3em 1em 0.2em; position: relative; background: #DDD; -moz-border-radius: 2px; -webkit-border-radius: 2px; border: 1px solid #BBB; }
+    .sum-title span { position: relative; top: -1px; left: -7px; font-size: 1em; font-weight: bold; }
+    .sum-title a { height: 18px; margin: -11px -3px 0 0; padding: 1px; position: absolute; right: 0.3em; top: 50%; width: 19px; -moz-border-radius: 4px; -webkit-border-radius: 4px; border: 1px solid #DDD; cursor: pointer; }
+    .sum-title a:hover { border: 1px solid #999999; background: #dadada url("../images/sum-btn.png") 50% 50% repeat-x; }
+        .sum-title a span { display: block; margin: 1px; background-image: url("../images/sum-icons.png"); background-position: -96px -128px; height: 16px; width: 16px; text-indent: -99999px; overflow: hidden; position: static; }
+.sum-body { min-height: 60px !important; clear: both; padding: 4px; }
+    .sum-body input, .sum-body textarea, .sum-body select { margin: 0; }
+    .sum-body textarea { width: 220px; height: 100px; }
+    .sum-body div { margin-bottom: 5px; }
+    span.preText { display: block; margin-bottom: 5px; }
+        .sum-body div span { display: block; font: 0.9em sans-serif; }
+    .sum-body em { color: #FF0000; font: normal 0.9em sans-serif; display: none; }
+.sum-loading { display: none; background: url("../images/rf-loading.gif") no-repeat 0 0; width: 32px; height: 8px; }
+.sum-button { margin-top: 8px; display: block; -moz-border-radius: 4px; -webkit-border-radius: 4px; background: url("../images/sum-btn.png") repeat-x scroll 50% 50% #E6E6E6; border: 1px solid #D3D3D3; color: #555; cursor: pointer; font-size: 0.8em; padding: 0.4em 1em; }
+.sum-button:hover { background: #FFF; }
+.sum-input { display: block; font-size: 0.9em; padding: 3px 2px; color: #777; margin: 0 !important; }
+.sum-hidden { display: none; }
